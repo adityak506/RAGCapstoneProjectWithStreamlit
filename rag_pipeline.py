@@ -125,16 +125,12 @@ class RAGPipeline:
         store_path = self._store_path()
         index_file = store_path / "index.faiss"
         
-        '''🔹 index.faiss ये binary file होती है जिसमें FAISS का actual vector index store होता है।
-        इसमें embeddings (vectors) और उनकी similarity search structure (IVF, HNSW, Flat आदि) save रहते हैं।
-        मतलब ये core data है जो fast similarity search को possible बनाता है।
-        👉 Without this file, FAISS search काम नहीं करेगा क्योंकि vectors ही missing होंगे।'''
+        '''🔹 index.faiss is the binary file where FAISS actual vector index store is done.
+        👉 Without this file, FAISS search will not work as vectors will be missing'''
         
         metadata_file = store_path / "index.pkl" #for metadata
-        '''🔹 index.pkl ये एक pickle file होती है जिसमें metadata save होता है।
-    Metadata में info रहता है जैसे: कौन सा document किस vector से जुड़ा है IDs, mapping, और extra attributes
-    Basically ये FAISS index को context देता है ताकि जब search result मिले तो पता चले कि वो किस document से आया है।
-👉 Without this file, FAISS सिर्फ vectors return करेगा लेकिन यह नहीं बताएगा कि वो किस document से जुड़े हैं।'''
+        '''🔹 index.pkl is used to store metadata.
+👉 Without this file, FAISS will only return vectors but will not be able to return metadata information'''
         
         if not index_file.exists() or not metadata_file.exists():
             chunk_count = self.build_vector_store() #an object method can be called by an object so self. is used
