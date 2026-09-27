@@ -60,6 +60,10 @@ Standard Large Language Models (LLMs) can invent plausible-sounding details (hal
 
 ## 🏗 Architecture & Workflow
 
+![NovaTech RAG Architecture](assets/rag_architecture.png)
+
+### 🔄 Interactive Flowchart
+
 ```mermaid
 flowchart TD
     subgraph INGESTION ["1. Ingestion & Indexing"]
